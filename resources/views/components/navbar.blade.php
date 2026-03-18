@@ -5,12 +5,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center transition-all duration-300" :class="scrolled ? 'h-16' : 'h-20'">
 
-            <a href="{{ url('/') }}" class="flex-shrink-0 flex items-center gap-2 cursor-pointer group">
-                <div
+            {{-- <a href="{{ url('/') }}" class="flex-shrink-0 flex items-center gap-2 cursor-pointer group"> --}}
+            <a href="{{ url('/') }}" class="flex flex-row items-center gap-1 cursor-pointer">
+                <img src="{{ asset('favicon_sigma.png') }}" alt="brand logo" width="35">
+                {{-- <div
                     class="w-8 h-8 rounded bg-violet-600 flex items-center justify-center text-white font-space-grotesk font-bold text-xl shadow-sm shadow-violet-500/50 group-hover:scale-105 transition-transform duration-300">
-                    S</div>
+                    S</div> --}}
                 <span
-                    class="font-space-grotesk font-bold text-xl tracking-tight text-zinc-900 dark:text-white">SIGMA</span>
+                    class="font-space-grotesk font-bold text-xl tracking-tight text-zinc-700 dark:text-zinc-200">SIGMA</span>
+                {{-- <span
+                    class="font-space-grotesk font-medium text-xs tracking-tight text-zinc-600 dark:text-zinc-300 max-lg:hidden">S1
+                    Pendidikan
+                    Informatika</span> --}}
             </a>
 
             <div class="hidden md:flex items-center space-x-8">

@@ -43,7 +43,7 @@
                     startTimer() { this.timer = setInterval(() => { this.next() }, 6000); },
                     stopTimer() { clearInterval(this.timer); }
                  }" x-init="startTimer()" @mouseenter="stopTimer()" @mouseleave="startTimer()"
-                class="relative w-full h-[600px] sm:h-[620px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
+                class="relative w-full h-[580px] sm:h-[600px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
 
                 <div class="relative w-full h-full">
                     <div x-show="activeSlide === 1" x-transition.opacity.duration.700ms

@@ -12,14 +12,14 @@
                     x-text="lang === 'id' ? 'DI BALIK LAYAR' : 'BEHIND THE SCENES'">DI BALIK LAYAR</span>
 
                 <h1 data-aos="fade-up" data-aos-delay="100"
-                    class="font-space-grotesk text-5xl md:text-7xl lg:text-8xl font-extrabold text-zinc-900 dark:text-white mb-8 tracking-tight">
+                    class="font-space-grotesk text-5xl md:text-6xl lg:text-7xl font-extrabold text-zinc-900 dark:text-white mb-6 tracking-tight">
                     <span x-text="lang === 'id' ? 'Membangun' : 'Building'">Membangun</span><br />
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-emerald-400"
                         x-text="lang === 'id' ? 'Masa Depan.' : 'the Future.'">Masa Depan.</span>
                 </h1>
 
                 <p data-aos="fade-up" data-aos-delay="200"
-                    class="font-roboto text-zinc-600 dark:text-zinc-400 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto"
+                    class="font-roboto text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-3xl mx-auto"
                     x-text="lang === 'id' ? 'SIGMA hadir untuk memberikan panggung digital yang layak bagi mahakarya mahasiswa Pendidikan Informatika. Kami merancang sistem ini bukan sekadar sebagai arsip, melainkan etalase inovasi yang mempertemukan talenta dengan peluang.' : 'SIGMA exists to provide a worthy digital stage for the masterpieces of Informatics Education students. We designed this system not just as an archive, but as an innovation showcase connecting talent with opportunities.'">
                     SIGMA hadir untuk memberikan panggung digital yang layak bagi mahakarya mahasiswa Pendidikan
                     Informatika. Kami merancang sistem ini bukan sekadar sebagai arsip, melainkan etalase inovasi yang
@@ -54,7 +54,7 @@
 
                 <div class="lg:col-span-7 flex flex-col gap-8">
                     <h3 class="font-space-grotesk text-2xl font-bold text-zinc-900 dark:text-white border-b border-zinc-200 dark:border-zinc-800 pb-4"
-                        x-text="lang === 'id' ? 'Langkah Misi' : 'Our Missions'">Langkah Misi</h3>
+                        x-text="lang === 'id' ? 'Misi Kami' : 'Our Missions'">Misi Kami</h3>
 
                     <div data-aos="fade-up" data-aos-delay="0" class="flex gap-6 items-start group">
                         <div
