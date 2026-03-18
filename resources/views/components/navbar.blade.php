@@ -21,18 +21,18 @@
                         class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full {{ request()->is('/') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                 </a>
 
-                <a href="{{ url('/about') }}"
-                    class="relative text-sm font-medium {{ request()->is('about') ? 'text-violet-600 dark:text-violet-400' : 'text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400' }} transition-colors group py-2">
-                    <span x-text="lang === 'id' ? 'Tentang' : 'About'">Tentang</span>
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full {{ request()->is('about') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
-                </a>
-
                 <a href="{{ url('/gallery') }}"
                     class="relative text-sm font-medium {{ request()->is('gallery') ? 'text-violet-600 dark:text-violet-400' : 'text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400' }} transition-colors group py-2">
                     <span x-text="lang === 'id' ? 'Galeri' : 'Gallery'">Galeri</span>
                     <span
                         class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full {{ request()->is('gallery') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                </a>
+
+                <a href="{{ url('/about') }}"
+                    class="relative text-sm font-medium {{ request()->is('about') ? 'text-violet-600 dark:text-violet-400' : 'text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400' }} transition-colors group py-2">
+                    <span x-text="lang === 'id' ? 'Tentang' : 'About'">Tentang</span>
+                    <span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full {{ request()->is('about') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                 </a>
 
                 <a href="{{ url('/contact') }}"
@@ -74,7 +74,7 @@
                             Indonesia</button>
                         <button @click="lang = 'en'; langOpen = false"
                             class="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                            :class="lang === 'en' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">🇬🇧
+                            :class="lang === 'en' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">ᴇɴ
                             English</button>
                     </div>
                 </div>
@@ -138,13 +138,13 @@
                 class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('/') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
                 x-text="lang === 'id' ? 'Beranda' : 'Home'">Beranda</a>
 
-            <a href="{{ url('/about') }}"
-                class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('about') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
-                x-text="lang === 'id' ? 'Tentang' : 'About'">Tentang</a>
-
             <a href="{{ url('/gallery') }}"
                 class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('gallery') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
                 x-text="lang === 'id' ? 'Galeri' : 'Gallery'">Galeri</a>
+
+            <a href="{{ url('/about') }}"
+                class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('about') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
+                x-text="lang === 'id' ? 'Tentang' : 'About'">Tentang</a>
 
             <a href="{{ url('/contact') }}"
                 class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('contact') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
