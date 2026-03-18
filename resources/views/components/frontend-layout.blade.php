@@ -10,6 +10,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_sigma.png') }}">
     <title>SIGMA - Showcase Inovasi & Galeri Mahasiswa</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

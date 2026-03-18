@@ -3,14 +3,17 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2 mb-4">
-                    <div
+                    <a href="{{ url('/') }}">
+                        <img src="{{ asset('logo_sigma.png') }}" alt="brand logo" class="w-32 h-8">
+                    </a>
+                    {{-- <div
                         class="w-8 h-8 rounded bg-violet-600 flex items-center justify-center text-white font-space-grotesk font-bold text-xl">
                         S</div>
                     <span
-                        class="font-space-grotesk font-bold text-xl tracking-tight text-zinc-900 dark:text-white">SIGMA</span>
+                        class="font-space-grotesk font-bold text-xl tracking-tight text-zinc-900 dark:text-white">SIGMA</span> --}}
                 </div>
                 <p class="font-roboto text-sm text-zinc-600 dark:text-zinc-400 max-w-sm mb-6 leading-relaxed"
-                    x-text="lang === 'id' ? 'Platform edukasi dan pameran inovasi digital karya mahasiswa Pendidikan Informatika. Mewadahi kreativitas, menginspirasi generasi.' : 'Educational platform and digital innovation exhibition for Informatics Education students. Fostering creativity, inspiring generations.'">
+                    x-text="lang === 'id' ? 'Platform edukasi dan pameran inovasi digital karya mahasiswa Prodi Pendidikan Informatika. Mewadahi kreativitas, menginspirasi generasi.' : 'Educational platform and digital innovation exhibition for Informatics Education students. Fostering creativity, inspiring generations.'">
                     Platform edukasi dan pameran inovasi digital karya mahasiswa Pendidikan Informatika. Mewadahi
                     kreativitas, menginspirasi generasi.
                 </p>
