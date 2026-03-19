@@ -31,7 +31,7 @@
         <section class="w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-start">
 
-                <div class="lg:col-span-5 lg:sticky lg:top-32" data-aos="fade-right">
+                <div data-aos="fade-up" data-aos-delay="400" class="lg:col-span-5 lg:sticky lg:top-32">
                     <div
                         class="w-16 h-16 bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 rounded-2xl flex items-center justify-center mb-8">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,11 +52,11 @@
                     </p>
                 </div>
 
-                <div class="lg:col-span-7 flex flex-col gap-8">
+                <div data-aos="fade-up" data-aos-delay="500" class="lg:col-span-7 flex flex-col gap-8">
                     <h3 class="font-space-grotesk text-2xl font-bold text-zinc-900 dark:text-white border-b border-zinc-200 dark:border-zinc-800 pb-4"
                         x-text="lang === 'id' ? 'Misi Kami' : 'Our Missions'">Misi Kami</h3>
 
-                    <div data-aos="fade-up" data-aos-delay="0" class="flex gap-6 items-start group">
+                    <div class="flex gap-6 items-start group">
                         <div
                             class="font-space-grotesk text-4xl font-black text-zinc-200 dark:text-zinc-800 group-hover:text-emerald-500 transition-colors">
                             01</div>

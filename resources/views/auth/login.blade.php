@@ -1,128 +1,365 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: localStorage.getItem('dark') === 'true', lang: 'id' }" :class="{ 'dark': darkMode }">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ 
+        darkMode: localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
+        lang: localStorage.getItem('lang') || 'id'
+    }" x-init="
+        $watch('darkMode', val => localStorage.setItem('darkMode', val));
+        $watch('lang', val => localStorage.setItem('lang', val));
+    " x-bind:class="{ 'dark': darkMode }" class="scroll-smooth">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - SIGMA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_sigma.png') }}">
+    <title>Masuk - SIGMA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
+        /* Custom Styles Latar Belakang Estetik Kiri */
         .mesh-gradient {
             background-color: #09090b;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(263,67%,33%,0.3) 0, transparent 50%), 
-                radial-gradient(at 100% 100%, hsla(160,84%,39%,0.2) 0, transparent 50%);
+            /* zinc-950 */
+            background-image:
+                radial-gradient(at 0% 0%, hsla(263, 67%, 33%, 0.3) 0, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(160, 84%, 39%, 0.2) 0, transparent 50%);
         }
+
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js"></script>
+
+    <script>
+        document.addEventListener("turbo:load", function() {
+            // Memaksa progress bar muncul tanpa delay (0 ms)
+            if (window.Turbo) {
+                Turbo.setProgressBarDelay(0);
+            }
+        });
+    </script>
+
+    <style>
+        .turbo-progress-bar {
+            height: 3px !important;
+            background-color: #8b5cf6 !important;
+            /* Warna violet utama SIGMA */
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.8), 0 0 5px rgba(139, 92, 246, 0.5);
+            z-index: 99999 !important;
+            /* Tambahkan efek transisi agar pergerakan bar lebih terlihat mulus dan tidak langsung menghilang */
+            transition: width 300ms ease-out, opacity 150ms 150ms ease-in !important;
+        }
+    </style>
 </head>
-<body class="antialiased bg-white dark:bg-zinc-950 transition-colors duration-500">
+
+<body
+    class="font-roboto antialiased text-zinc-900 bg-white dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-500 selection:bg-violet-500 selection:text-white">
 
     <main class="min-h-screen flex flex-col md:flex-row overflow-hidden">
-        
-        <div class="hidden md:flex md:w-1/2 lg:w-3/5 relative mesh-gradient items-center justify-center p-12 overflow-hidden">
-            
-            <div class="absolute inset-0 z-0 opacity-20"
-                style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 50px 50px;">
+
+        <div
+            class="hidden md:flex md:w-1/2 lg:w-3/5 relative mesh-gradient items-center justify-center p-12 lg:p-20 overflow-hidden">
+
+            <div class="absolute inset-0 z-0 opacity-[0.04]"
+                style="background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px); background-size: 50px 50px;">
             </div>
 
-            <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/20 rounded-full filter blur-[120px] animate-pulse"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full filter blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
+            <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/20 rounded-full filter blur-[120px] animate-pulse"
+                style="animation-duration: 4s;"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full filter blur-[100px] animate-pulse"
+                style="animation-duration: 6s;"></div>
 
-            <div class="relative z-10 w-full max-w-2xl">
-                <a href="/" class="inline-flex items-center gap-3 text-zinc-400 hover:text-white mb-16 group transition-all">
-                    <div class="p-2 glass rounded-xl group-hover:bg-violet-600 group-hover:border-violet-500 transition-all">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    </div>
-                    <span class="font-medium tracking-wide" x-text="lang === 'id' ? 'Kembali ke Beranda' : 'Back to Home'"></span>
-                </a>
-                
+            <div class="relative z-10 w-full max-w-2xl" x-data="statsCounter()" x-init="observe()">
+
                 <div class="space-y-8">
-                    <div class="inline-block px-4 py-2 glass rounded-2 font-space-grotesk text-violet-400 text-sm font-bold tracking-widest uppercase mb-4">
+                    <div data-aos="fade-down"
+                        class="inline-block px-4 py-2 glass rounded-2xl font-space-grotesk text-violet-400 text-sm font-bold tracking-widest uppercase mb-2 shadow-lg">
                         Powered by SIGMA
                     </div>
-                    
-                    <h1 class="text-6xl lg:text-8xl font-space-grotesk font-bold text-white leading-none tracking-tighter">
-                       Shaping the Future <br> 
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400">
-                            of Academic.
+
+                    <h1 data-aos="fade-up" data-aos-delay="100"
+                        class="text-6xl lg:text-7xl xl:text-8xl font-space-grotesk font-bold text-white leading-[1.1] tracking-tighter">
+                        <span x-text="lang === 'id' ? 'Membentuk' : 'Shaping the'">Membentuk</span> <br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400"
+                            x-text="lang === 'id' ? 'Masa Depan.' : 'Future.'">
+                            Masa Depan.
                         </span>
                     </h1>
 
-                    <p class="text-zinc-400 text-xl font-roboto max-w-md leading-relaxed">
-                        <span x-text="lang === 'id' ? 'Kelola data akademik dan riset Anda dalam satu platform cerdas yang terintegrasi.' : 'Manage your academic and research data in one intelligent integrated platform.'"></span>
+                    <p data-aos="fade-up" data-aos-delay="200"
+                        class="text-zinc-400 text-xl font-roboto max-w-md leading-relaxed">
+                        <span
+                            x-text="lang === 'id' ? 'Kelola data inovasi dan mahakarya Anda dalam satu platform cerdas yang terintegrasi.' : 'Manage your innovation data and masterpieces in one intelligent integrated platform.'">Kelola
+                            data inovasi dan mahakarya Anda dalam satu platform cerdas yang terintegrasi.</span>
                     </p>
 
-                    <div class="grid grid-cols-2 gap-4 mt-12">
-                        <div class="glass p-6 rounded-2xl">
-                            <div class="text-white text-2xl font-bold font-space-grotesk">15k+</div>
-                            <div class="text-zinc-500 text-sm" x-text="lang === 'id' ? 'Mahasiswa Aktif' : 'Active Students'"></div>
+                    <div class="grid grid-cols-2 gap-4 sm:gap-6 mt-12">
+                        <div data-aos="fade-up" data-aos-delay="300"
+                            class="glass p-6 sm:p-8 rounded-3xl border-l-4 border-l-violet-500/50 hover:bg-white/5 transition-colors shadow-2xl">
+                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2">
+                                <span x-text="karya">0</span>+
+                            </div>
+                            <div class="text-zinc-400 text-sm sm:text-base font-medium font-roboto"
+                                x-text="lang === 'id' ? 'Karya Mahasiswa' : 'Student Projects'">Karya Mahasiswa</div>
                         </div>
-                        <div class="glass p-6 rounded-2xl">
-                            <div class="text-white text-2xl font-bold font-space-grotesk">99.9%</div>
-                            <div class="text-zinc-500 text-sm" x-text="lang === 'id' ? 'Waktu Aktif' : 'System Uptime'"></div>
+
+                        <div data-aos="fade-up" data-aos-delay="400"
+                            class="glass p-6 sm:p-8 rounded-3xl border-l-4 border-l-emerald-500/50 hover:bg-white/5 transition-colors shadow-2xl">
+                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2">
+                                <span x-text="mahasiswa">0</span>+
+                            </div>
+                            <div class="text-zinc-400 text-sm sm:text-base font-medium font-roboto"
+                                x-text="lang === 'id' ? 'Mahasiswa Aktif' : 'Active Students'">Mahasiswa Aktif</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="absolute bottom-10 left-10 text-[10rem] font-bold text-white/[0.02] select-none pointer-events-none font-space-grotesk">
+            <div
+                class="absolute bottom-10 left-10 text-[10rem] font-bold text-white/[0.02] select-none pointer-events-none font-space-grotesk">
                 SIGMA
             </div>
         </div>
 
-        <div class="w-full md:w-1/2 lg:w-2/5 flex flex-col relative bg-white dark:bg-zinc-950 p-8 sm:p-12 lg:p-24 justify-center">
-            
-            <div class="absolute top-8 right-8 flex items-center gap-3">
-                <button @click="lang = lang === 'id' ? 'en' : 'id'" class="w-10 h-10 flex items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all uppercase">
-                    <span x-text="lang"></span>
-                </button>
+        <div class="w-full md:w-1/2 lg:w-2/5 flex flex-col relative bg-white dark:bg-zinc-950 min-h-screen">
 
-                <button @click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)" class="w-10 h-10 flex items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all">
-                    <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                </button>
+            <div class="absolute top-0 left-0 w-full p-6 sm:p-8 flex justify-between items-start z-20">
+
+                <a href="{{ url('/') }}" data-aos="fade-down"
+                    class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group bg-zinc-50 dark:bg-zinc-900 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800">
+                    <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span class="hidden sm:inline" x-text="lang === 'id' ? 'Kembali' : 'Back'">Kembali</span>
+                </a>
+
+                <div data-aos="fade-down" data-aos-delay="100" class="flex items-center gap-2 sm:gap-3">
+                    <div class="relative" x-data="{ langOpen: false }">
+                        <button @click="langOpen = !langOpen" @click.away="langOpen = false" type="button"
+                            class="flex items-center gap-1 text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-violet-600 transition-colors p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                            <span x-text="lang === 'id' ? 'ID' : 'EN'" class="font-space-grotesk font-bold">ID</span>
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="langOpen ? 'rotate-180' : ''"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div x-show="langOpen" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            x-cloak
+                            class="absolute right-0 mt-2 w-36 bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-800 py-2 overflow-hidden z-50">
+                            <button @click="lang = 'id'; langOpen = false"
+                                class="flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                                :class="lang === 'id' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">🇮🇩
+                                Indonesia</button>
+                            <button @click="lang = 'en'; langOpen = false"
+                                class="flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                                :class="lang === 'en' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">🇬🇧
+                                English</button>
+                        </div>
+                    </div>
+
+                    <button @click="darkMode = !darkMode" type="button"
+                        class="p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors shadow-sm"
+                        aria-label="Toggle Dark Mode">
+                        <svg x-show="!darkMode" x-cloak class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg x-show="darkMode" x-cloak class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="w-full max-w-sm mx-auto">
-                <div class="md:hidden mb-8 text-violet-600 font-bold text-2xl tracking-tighter">SIGMA.</div>
+            <div
+                class="flex-grow flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-20 w-full max-w-xl mx-auto pt-28 pb-10">
+
+                <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <div class="mb-10 text-left">
-                    <h2 class="font-space-grotesk text-4xl font-bold text-zinc-900 dark:text-white mb-3" x-text="lang === 'id' ? 'Selamat Datang' : 'Welcome Back'"></h2>
-                    <p class="font-roboto text-zinc-500 dark:text-zinc-400" x-text="lang === 'id' ? 'Silahkan masuk dengan akun kampus Anda.' : 'Please sign in with your campus account.'"></p>
+                    <div data-aos="fade-down" class="md:hidden mb-8">
+                        <img src="{{ asset('logo_sigma.png') }}" alt="" width="150">
+                    </div>
+
+                    <h2 data-aos="fade-up"
+                        class="font-space-grotesk text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-3">
+                        <span x-text="lang === 'id' ? 'Masuk ke Akun Anda' : 'Sign in to your account'">Masuk ke Akun
+                            Anda</span>
+                    </h2>
+                    <p data-aos="fade-up" data-aos-delay="100"
+                        class="font-roboto text-zinc-500 dark:text-zinc-400 text-sm sm:text-base">
+                        <span
+                            x-text="lang === 'id' ? 'Silakan masuk dengan akun email kampus Anda.' : 'Please sign in with your campus email account.'">Silakan
+                            masuk dengan akun email kampus Anda.</span>
+                    </p>
                 </div>
 
-                <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                <form method="POST" action="{{ route('login') }}" class="space-y-6 w-full">
                     @csrf
-                    <div>
-                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2" x-text="lang === 'id' ? 'Email Kampus' : 'Campus Email'"></label>
-                        <input type="email" name="email" required class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-violet-500 outline-none transition-all">
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" x-text="lang === 'id' ? 'Kata Sandi' : 'Password'"></label>
-                            <a href="#" class="text-xs text-violet-600 dark:text-violet-400 hover:underline" x-text="lang === 'id' ? 'Lupa Sandi?' : 'Forgot?'"></a>
-                        </div>
-                        <input type="password" name="password" required class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-violet-500 outline-none transition-all">
+
+                    <div data-aos="fade-up" data-aos-delay="200" class="space-y-2">
+                        <label for="email"
+                            class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
+                            x-text="lang === 'id' ? 'Email Kampus' : 'Campus Email'">Email Kampus</label>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                            autocomplete="username"
+                            class="w-full px-4 py-3.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl placeholder-zinc-400 focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all outline-none font-roboto shadow-sm"
+                            :placeholder="lang === 'id' ? 'contoh@student.trunojoyo.ac.id' : 'example@student.trunojoyo.ac.id'">
+                        @error('email')
+                        <p class="text-sm text-rose-500 font-roboto mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <button type="submit" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold py-4 rounded-xl hover:bg-violet-600 dark:hover:bg-violet-400 transition-all shadow-lg">
-                        <span x-text="lang === 'id' ? 'Masuk' : 'Sign In'"></span>
-                    </button>
+                    <div data-aos="fade-up" data-aos-delay="300" class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label for="password"
+                                class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
+                                x-text="lang === 'id' ? 'Kata Sandi' : 'Password'">Kata Sandi</label>
+                            @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}"
+                                class="text-xs font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 hover:underline transition-all font-roboto"
+                                tabindex="-1">
+                                <span x-text="lang === 'id' ? 'Lupa Sandi?' : 'Forgot Password?'">Lupa Sandi?</span>
+                            </a>
+                            @endif
+                        </div>
+                        <div class="relative" x-data="{ show: false }">
+                            <input id="password" :type="show ? 'text' : 'password'" name="password" required
+                                autocomplete="current-password"
+                                class="w-full pl-4 pr-12 py-3.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl placeholder-zinc-400 focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all outline-none font-roboto shadow-sm"
+                                :placeholder="lang === 'id' ? 'Masukkan kata sandi' : 'Enter your password'">
+                            <button type="button" @click="show = !show"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-zinc-400 hover:text-violet-600 transition-colors"
+                                tabindex="-1">
+                                <svg x-show="!show" class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21">
+                                    </path>
+                                </svg>
+                                <svg x-show="show" x-cloak class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        @error('password')
+                        <p class="text-sm text-rose-500 font-roboto mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div data-aos="fade-up" data-aos-delay="400" class="flex items-center pt-2">
+                        <input id="remember_me" type="checkbox" name="remember"
+                            class="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-violet-600 focus:ring-violet-500 dark:focus:ring-violet-600 dark:ring-offset-zinc-950 dark:bg-zinc-900 cursor-pointer transition-colors">
+                        <label for="remember_me"
+                            class="ml-2 block text-sm font-medium text-zinc-600 dark:text-zinc-400 font-roboto cursor-pointer"
+                            x-text="lang === 'id' ? 'Ingat sesi saya' : 'Remember my session'">
+                            Ingat sesi saya
+                        </label>
+                    </div>
+
+                    <div data-aos="fade-up" data-aos-delay="500" class="pt-4">
+                        <button type="submit"
+                            class="w-full flex justify-center items-center gap-2 bg-violet-600 dark:bg-violet-600 text-white dark:text-white font-bold py-4 rounded-xl hover:bg-violet-500 dark:hover:bg-violet-500 hover:text-white dark:hover:text-white transition-all duration-300 shadow-lg hover:-translate-y-0.5 group">
+                            <span class="font-space-grotesk"
+                                x-text="lang === 'id' ? 'Masuk Sekarang' : 'Sign In Now'">Masuk Sekarang</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </form>
 
-                <div class="mt-10 text-center">
-                    <p class="text-sm text-zinc-500">
-                        <span x-text="lang === 'id' ? 'Belum punya akun?' : 'No account?'"></span>
-                        <a href="{{ route('register') }}" class="font-bold text-violet-600 ml-1 hover:underline" x-text="lang === 'id' ? 'Daftar' : 'Register'"></a>
+                <div data-aos="fade-up" data-aos-delay="600"
+                    class="mt-8 text-center border-t border-zinc-200 dark:border-zinc-800 pt-8">
+                    <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 font-roboto">
+                        <span x-text="lang === 'id' ? 'Belum memiliki akun?' : 'Don\'t have an account?'">Belum memiliki
+                            akun?</span>
+                        <a href="{{ route('register') }}"
+                            class="font-bold text-violet-600 dark:text-violet-600 ml-1 hover:underline transition-all"
+                            x-text="lang === 'id' ? 'Daftar di sini' : 'Register here'">Daftar di sini</a>
                     </p>
                 </div>
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('statsCounter', () => ({
+                karya: 0, targetKarya: 245,
+                mahasiswa: 0, targetMahasiswa: 128,
+                started: false,
+                observe() {
+                    let observer = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting && !this.started) {
+                            this.started = true;
+                            this.animate(this.targetKarya, 'karya');
+                            this.animate(this.targetMahasiswa, 'mahasiswa');
+                        }
+                    }, { threshold: 0.5 });
+                    observer.observe(this.$el);
+                },
+                animate(target, prop) {
+                    let startTimestamp = null;
+                    const duration = 2500; // 2.5 detik animasi
+                    const step = (timestamp) => {
+                        if (!startTimestamp) startTimestamp = timestamp;
+                        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                        const ease = 1 - Math.pow(1 - progress, 4); // Quartic ease-out
+                        this[prop] = Math.floor(ease * target);
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                }
+            }));
+        });
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 20,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
 </body>
+
 </html>

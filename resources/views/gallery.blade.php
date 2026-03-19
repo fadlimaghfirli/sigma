@@ -49,7 +49,7 @@
                     <div x-show="activeSlide === 1" x-transition.opacity.duration.700ms
                         class="absolute inset-0 w-full h-full flex flex-col lg:flex-row">
                         <div
-                            class="w-full lg:w-1/2 h-64 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
+                            class="w-full lg:w-1/2 h-56 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
                                 alt="Highlight 1"
                                 class="w-full h-full object-cover transform transition-transform duration-[10000ms] ease-linear"
@@ -135,7 +135,7 @@
                     <div x-show="activeSlide === 2" x-transition.opacity.duration.700ms
                         class="absolute inset-0 w-full h-full flex flex-col lg:flex-row" x-cloak>
                         <div
-                            class="w-full lg:w-1/2 h-64 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
+                            class="w-full lg:w-1/2 h-56 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
                             <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop"
                                 alt="Highlight 2"
                                 class="w-full h-full object-cover transform transition-transform duration-[10000ms] ease-linear"
@@ -219,7 +219,7 @@
                     <div x-show="activeSlide === 3" x-transition.opacity.duration.700ms
                         class="absolute inset-0 w-full h-full flex flex-col lg:flex-row" x-cloak>
                         <div
-                            class="w-full lg:w-1/2 h-64 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
+                            class="w-full lg:w-1/2 h-56 sm:h-72 lg:h-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800 shrink-0">
                             <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1200&auto=format&fit=crop"
                                 alt="Highlight 3"
                                 class="w-full h-full object-cover transform transition-transform duration-[10000ms] ease-linear"
@@ -304,10 +304,11 @@
         </div>
 
         <div class="flex flex-col gap-6 pt-4">
-            <h2 data-aos="fade-up" class="font-space-grotesk text-2xl font-bold text-zinc-900 dark:text-white"
+            <h2 data-aos="fade-up" data-aos-delay="200"
+                class="font-space-grotesk text-2xl font-bold text-zinc-900 dark:text-white"
                 x-text="lang === 'id' ? 'Eksplorasi Semua Karya' : 'Explore All Projects'">Eksplorasi Semua Karya</h2>
 
-            <div data-aos="fade-up" data-aos-delay="100"
+            <div data-aos="fade-up" data-aos-delay="200"
                 class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white dark:bg-zinc-900 p-3 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 relative z-30">
                 <div class="relative w-full sm:w-2/3 flex items-center">
                     <svg class="w-5 h-5 text-zinc-400 absolute left-4" fill="none" stroke="currentColor"
@@ -391,7 +392,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
 
-            <div data-aos="fade-up" data-aos-delay="300"
+            <div data-aos="fade-up" data-aos-delay="100"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'web') && (filterJenis === 'semua' || filterJenis === 'praktikum')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -461,7 +462,7 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="400"
+            <div data-aos="fade-up" data-aos-delay="200"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'iot') && (filterJenis === 'semua' || filterJenis === 'tugas_akhir')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -529,7 +530,7 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="500"
+            <div data-aos="fade-up" data-aos-delay="300"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'uiux') && (filterJenis === 'semua' || filterJenis === 'kompetisi')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -597,7 +598,7 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="300"
+            <div data-aos="fade-up" data-aos-delay="100"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'web') && (filterJenis === 'semua' || filterJenis === 'tugas_akhir')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -664,7 +665,7 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="400"
+            <div data-aos="fade-up" data-aos-delay="200"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'uiux') && (filterJenis === 'semua' || filterJenis === 'praktikum')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -732,7 +733,7 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="500"
+            <div data-aos="fade-up" data-aos-delay="300"
                 x-show="(kategoriAktif === 'semua' || kategoriAktif === 'game') && (filterJenis === 'semua' || filterJenis === 'kompetisi')"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
@@ -802,7 +803,7 @@
 
         </div>
 
-        <div data-aos="fade-up" data-aos-delay="100"
+        <div data-aos="fade-up" data-aos-delay="0"
             class="mt-16 flex flex-col items-center justify-center gap-4 w-full relative z-10">
             <span class="text-sm text-zinc-500 dark:text-zinc-400 font-roboto"
                 x-text="lang === 'id' ? 'Menampilkan 1 hingga 6 dari 245 proyek' : 'Showing 1 to 6 of 245 projects'">Menampilkan

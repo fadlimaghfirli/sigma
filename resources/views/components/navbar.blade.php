@@ -47,13 +47,6 @@
                     <span
                         class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full {{ request()->is('contact') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                 </a>
-
-                <a href="{{ url('/#faq') }}"
-                    class="relative text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group py-2">
-                    <span x-text="lang === 'id' ? 'Bantuan' : 'Help'">Bantuan</span>
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-violet-600 dark:bg-violet-400 transition-all duration-300 rounded-full w-0 group-hover:w-full"></span>
-                </a>
             </div>
 
             <div class="flex items-center gap-3 sm:gap-4">
@@ -155,10 +148,6 @@
             <a href="{{ url('/contact') }}"
                 class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('contact') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
                 x-text="lang === 'id' ? 'Kontak' : 'Contact'">Kontak</a>
-
-            <a href="{{ url('/#faq') }}" @click="mobileMenuOpen = false"
-                class="block px-4 py-3 rounded-xl text-base font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-                x-text="lang === 'id' ? 'Bantuan (FAQ)' : 'Help (FAQ)'">Bantuan (FAQ)</a>
 
             @if (Route::has('login'))
             <div class="pt-4 mt-2 border-t border-zinc-100 dark:border-zinc-800/50 flex flex-col gap-3 px-2">
