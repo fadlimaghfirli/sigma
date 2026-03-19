@@ -1,4 +1,98 @@
 <x-frontend-layout>
+    <div x-data="{ 
+            show: !sessionStorage.getItem('sigmaIntroPlayed'), 
+            progress: 0,
+            init() {
+                // Jika intro sudah pernah dimainkan, hentikan proses dan pastikan scroll terbuka
+                if (!this.show) {
+                    document.body.style.overflow = 'auto';
+                    return;
+                }
+                
+                // Kunci scroll saat loading & pastikan layar di paling atas
+                document.body.style.overflow = 'hidden';
+                window.scrollTo(0, 0);
+                
+                // Interval 150ms & penambahan angka kecil agar durasi sedikit lebih lama
+                let interval = setInterval(() => {
+                    this.progress += Math.floor(Math.random() * 6) + 2;
+                    
+                    if (this.progress >= 100) {
+                        this.progress = 100;
+                        clearInterval(interval);
+
+                        // 1. [KODE BARU] Sembunyikan elemen AOS SECARA INSTAN tanpa animasi mundur
+                        // Dilakukan saat preloader masih 100% menutupi layar
+                        let aosElements = document.querySelectorAll('[data-aos]');
+                        aosElements.forEach(el => {
+                            el.style.transition = 'none'; // Matikan transisi mundur
+                            el.classList.remove('aos-animate'); // Sembunyikan elemen
+                        });
+
+                        // Kembalikan properti transisi agar nanti bisa dianimasikan lagi
+                        setTimeout(() => {
+                            aosElements.forEach(el => { el.style.transition = ''; });
+                        }, 50);
+                        
+                        // Tahan lebih lama (800ms) di angka 100% lalu mulai animasi keluar
+                        setTimeout(() => { 
+                            this.show = false; 
+                            document.body.style.overflow = 'auto';
+                            sessionStorage.setItem('sigmaIntroPlayed', 'true');
+                            
+                            // Tunda sedikit untuk memberi waktu browser merender tinggi halaman penuh
+                            setTimeout(() => {
+                                // Reset animasi elemen hero yang sudah keburu jalan
+                                document.querySelectorAll('[data-aos]').forEach(el => {
+                                    el.classList.remove('aos-animate');
+                                });
+
+                                // PAKSA browser menghitung ulang layout agar AOS dan Alpine sadar perubahan dimensi
+                                window.dispatchEvent(new Event('resize'));
+                                window.dispatchEvent(new Event('scroll'));
+                                
+                                if(typeof AOS !== 'undefined') {
+                                    AOS.refreshHard(); // Hitung ulang seluruh titik koordinat animasi
+                                }
+                            }, 600);
+                        }, 800);
+                    }
+                }, 150);
+            }
+        }" x-show="show" x-transition:leave="transition-all duration-[1500ms] ease-[cubic-bezier(0.7,0,0.3,1)]"
+        x-transition:leave-start="opacity-100 scale-100 blur-none" x-transition:leave-end="opacity-0 scale-125 blur-xl"
+        class="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-white origin-center"
+        x-cloak>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-violet-400/20 dark:bg-violet-600/20 rounded-full blur-[100px] animate-pulse"
+            style="animation-duration: 4s;">
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+
+            <div class="flex items-center justify-center mb-8 transition-all duration-700 ease-out"
+                :class="progress === 100 ? 'scale-110 -rotate-3' : 'scale-100'">
+                <img src="{{ asset('favicon_sigma.png') }}" alt="brand logo" width="120" height="120">
+            </div>
+            <div class="flex flex-col items-center gap-1 mb-10">
+                <span
+                    class="text-3xl sm:text-4xl font-space-grotesk font-extrabold tracking-[0.2em] text-white">SIGMA</span>
+                <span class="text-sm font-roboto text-zinc-400">Showcase Inovasi & Galeri Mahasiswa</span>
+            </div>
+
+            <div
+                class="w-64 sm:w-80 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden mb-4 relative shadow-inner">
+                <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-violet-500 to-emerald-500 transition-all duration-200 ease-out shadow-[0_0_10px_rgba(139,92,246,0.8)]"
+                    :style="`width: ${progress}%`"></div>
+            </div>
+
+            <div class="font-mono text-sm sm:text-base font-bold tracking-widest flex items-center gap-2 transition-colors duration-500"
+                :class="progress === 100 ? 'text-emerald-600 dark:text-emerald-400' : 'text-zinc-500 dark:text-zinc-400'">
+                <span x-text="lang === 'id' ? 'MEMUAT' : 'LOADING'"></span>
+                <span class="w-12 text-right" x-text="`${progress}%`"></span>
+            </div>
+        </div>
+    </div>
 
     <section class="relative w-full pt-44 pb-24 flex flex-col items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0 opacity-[0.15] dark:opacity-[0.07]"
@@ -220,7 +314,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[600px]">
 
-            <div data-aos="fade-right" data-aos-delay="100"
+            <div data-aos="fade-up" data-aos-delay="100"
                 class="lg:col-span-8 relative group rounded-3xl overflow-hidden shadow-lg h-[450px] lg:h-full cursor-pointer bg-zinc-900 border dark:border-zinc-800">
                 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
                     alt="Highlight 1"
@@ -268,7 +362,7 @@
 
             <div class="lg:col-span-4 flex flex-col gap-6 lg:h-full">
 
-                <div data-aos="fade-left" data-aos-delay="200"
+                <div data-aos="fade-up" data-aos-delay="200"
                     class="relative group rounded-3xl overflow-hidden shadow-lg h-[300px] lg:h-1/2 cursor-pointer bg-zinc-900 border dark:border-zinc-800">
                     <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop"
                         alt="Highlight 2"
@@ -311,7 +405,7 @@
                     </div>
                 </div>
 
-                <div data-aos="fade-left" data-aos-delay="300"
+                <div data-aos="fade-up" data-aos-delay="300"
                     class="relative group rounded-3xl overflow-hidden shadow-lg h-[300px] lg:h-1/2 cursor-pointer bg-zinc-900 border dark:border-zinc-800">
                     <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=600&auto=format&fit=crop"
                         alt="Highlight 3"
@@ -502,6 +596,51 @@
         </div>
     </section>
 
+    <div x-data="{ 
+            showFaqBtn: false,
+            checkFaqVisibility() {
+                // Jangan munculkan tombol jika preloader masih jalan
+                if (document.body.style.overflow === 'hidden') {
+                    this.showFaqBtn = false;
+                    return;
+                }
+
+                const faqSection = document.getElementById('faq');
+                if (faqSection) {
+                    const rect = faqSection.getBoundingClientRect();
+                    // Tombol akan TAMPIL jika bagian atas section FAQ masih di bawah layar
+                    this.showFaqBtn = rect.top > (window.innerHeight - 150);
+                }
+            }
+        }" @scroll.window="checkFaqVisibility()" x-init="
+            // Cek visibilitas secara berkala saat inisialisasi
+            setInterval(() => checkFaqVisibility(), 500);
+        " x-show="showFaqBtn" x-transition:enter="transition ease-out duration-500"
+        x-transition:enter-start="opacity-0 translate-y-8 scale-90"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+        x-transition:leave-end="opacity-0 translate-y-8 scale-90" class="fixed bottom-8 left-6 sm:left-8 z-[90]"
+        x-cloak>
+
+        <a href="#faq" data-turbo="false"
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 shadow-lg hover:shadow-xl hover:scale-110 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-300 group"
+            aria-label="FAQ & Bantuan">
+
+            <svg class="w-6 h-6 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+            </svg>
+
+            <span
+                class="absolute left-14 px-3 py-1.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold font-roboto rounded-lg opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-md">
+                <span x-text="lang === 'id' ? 'Bantuan FAQ' : 'FAQ Help'">Bantuan FAQ</span>
+            </span>
+        </a>
+    </div>
+
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('statsCounter', () => ({
@@ -512,7 +651,8 @@
                 started: false,
                 observe() {
                     let observer = new IntersectionObserver((entries) => {
-                        if (entries[0].isIntersecting && !this.started) {
+                        // Syarat: Hanya jalan jika overflow body bukan 'hidden' (preloader sudah selesai)
+                        if (entries[0].isIntersecting && !this.started && document.body.style.overflow !== 'hidden') {
                             this.started = true;
                             this.animate(this.targetKarya, 'karya');
                             this.animate(this.targetMahasiswa, 'mahasiswa');
@@ -521,6 +661,21 @@
                         }
                     }, { threshold: 0.5 });
                     observer.observe(this.$el);
+
+                    // Fallback (Penyelamat): Cek posisi elemen secara manual saat user scroll
+                    window.addEventListener('scroll', () => {
+                        if (!this.started && document.body.style.overflow !== 'hidden') {
+                            let rect = this.$el.getBoundingClientRect();
+                            // Jika elemen statistik sudah masuk ke dalam jangkauan layar
+                            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                                this.started = true;
+                                this.animate(this.targetKarya, 'karya');
+                                this.animate(this.targetMahasiswa, 'mahasiswa');
+                                this.animate(this.targetKategori, 'kategori');
+                                this.animate(this.targetPengunjung, 'pengunjung');
+                            }
+                        }
+                    });
                 },
                 animate(target, prop) {
                     let startTimestamp = null;

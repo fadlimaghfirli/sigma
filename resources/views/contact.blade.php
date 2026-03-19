@@ -30,7 +30,7 @@
 
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start relative z-10">
 
-            <div class="lg:col-span-5 flex flex-col gap-10" data-aos="fade-right" data-aos-delay="300">
+            <div class="lg:col-span-5 flex flex-col gap-10" data-aos="fade-up" data-aos-delay="400">
                 <div
                     class="bg-white dark:bg-zinc-900 p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm">
                     <h3 class="font-space-grotesk text-2xl font-bold text-zinc-900 dark:text-white mb-6"
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-7" data-aos="fade-left" data-aos-delay="400">
+            <div class="lg:col-span-7" data-aos="fade-up" data-aos-delay="500">
 
                 @if(session('success'))
                 <div x-data="{ show: true }" x-show="show"

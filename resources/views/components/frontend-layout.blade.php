@@ -10,8 +10,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
 
+    <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_sigma.png') }}">
     <title>SIGMA - Showcase Inovasi & Galeri Mahasiswa</title>
 
@@ -23,6 +23,29 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js"></script>
+
+    <script>
+        document.addEventListener("turbo:load", function() {
+            // Memaksa progress bar muncul tanpa delay (0 ms)
+            if (window.Turbo) {
+                Turbo.setProgressBarDelay(0);
+            }
+        });
+    </script>
+
+    <style>
+        .turbo-progress-bar {
+            height: 3px !important;
+            background-color: #8b5cf6 !important;
+            /* Warna violet utama SIGMA */
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.8), 0 0 5px rgba(139, 92, 246, 0.5);
+            z-index: 99999 !important;
+            /* Tambahkan efek transisi agar pergerakan bar lebih terlihat mulus dan tidak langsung menghilang */
+            transition: width 300ms ease-out, opacity 150ms 150ms ease-in !important;
+        }
+    </style>
 </head>
 
 <body
@@ -50,7 +73,39 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, offset: 60, duration: 900, easing: 'ease-out-cubic' });
+        // Event 'turbo:load' akan dipicu setiap kali halaman diganti tanpa reload tab
+        document.addEventListener("turbo:load", function() {
+            AOS.init({
+                once: true,
+                offset: 20,
+                duration: 800,
+                easing: 'ease-out-cubic',
+            });
+        });
+    </script>
+
+    <script>
+        // 1. Tepat sebelum pindah halaman, matikan efek scroll-smooth
+        document.addEventListener('turbo:before-visit', () => {
+            document.documentElement.classList.remove('scroll-smooth');
+        });
+
+        // 2. Saat halaman baru dimuat, paksa ke atas dan nyalakan lagi efeknya
+        document.addEventListener('turbo:load', () => {
+            // Paksa scroll ke paling atas secara instan
+            window.scrollTo(0, 0);
+            
+            // Beri jeda sangat kecil sebelum menyalakan ulang smooth scroll
+            // agar perintah scrollTo di atas benar-benar dieksekusi secara instan
+            setTimeout(() => {
+                document.documentElement.classList.add('scroll-smooth');
+                
+                // Refresh AOS agar mendeteksi posisi baru dari paling atas
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+            }, 10);
+        });
     </script>
 </body>
 
