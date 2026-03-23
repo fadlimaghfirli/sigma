@@ -64,20 +64,21 @@
         class="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-white origin-center"
         x-cloak>
 
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-violet-400/20 dark:bg-violet-600/20 rounded-full blur-[100px] animate-pulse"
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-violet-500/20 dark:bg-violet-600/20 rounded-full blur-[100px] animate-pulse"
             style="animation-duration: 4s;">
         </div>
 
         <div class="relative z-10 flex flex-col items-center">
 
             <div class="flex items-center justify-center mb-8 transition-all duration-700 ease-out"
-                :class="progress === 100 ? 'scale-110 -rotate-3' : 'scale-100'">
+                :class="progress === 100 ? 'scale-110 -rotate-6' : 'scale-100'">
                 <img src="{{ asset('favicon_sigma.png') }}" alt="brand logo" width="120" height="120">
             </div>
             <div class="flex flex-col items-center gap-1 mb-10">
                 <span
-                    class="text-3xl sm:text-4xl font-space-grotesk font-extrabold tracking-[0.2em] text-white">SIGMA</span>
-                <span class="text-sm font-roboto text-zinc-400">Showcase Inovasi & Galeri Mahasiswa</span>
+                    class="text-3xl sm:text-4xl font-space-grotesk font-extrabold tracking-[0.2em] text-zinc-700 dark:text-white">SIGMA</span>
+                <span class="text-sm font-roboto text-zinc-600 dark:text-zinc-400">Showcase Inovasi & Galeri
+                    Mahasiswa</span>
             </div>
 
             <div
