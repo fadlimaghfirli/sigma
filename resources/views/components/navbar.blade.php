@@ -5,18 +5,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center transition-all duration-300" :class="scrolled ? 'h-16' : 'h-20'">
 
-            {{-- <a href="{{ url('/') }}" class="flex-shrink-0 flex items-center gap-2 cursor-pointer group"> --}}
             <a href="{{ url('/') }}" class="flex flex-row items-center gap-1 cursor-pointer">
                 <img src="{{ asset('favicon_sigma.png') }}" alt="brand logo" width="35">
-                {{-- <div
-                    class="w-8 h-8 rounded bg-violet-600 flex items-center justify-center text-white font-space-grotesk font-bold text-xl shadow-sm shadow-violet-500/50 group-hover:scale-105 transition-transform duration-300">
-                    S</div> --}}
                 <span
                     class="font-space-grotesk font-bold text-xl tracking-tight text-zinc-700 dark:text-zinc-200">SIGMA</span>
-                {{-- <span
-                    class="font-space-grotesk font-medium text-xs tracking-tight text-zinc-600 dark:text-zinc-300 max-lg:hidden">S1
-                    Pendidikan
-                    Informatika</span> --}}
             </a>
 
             <div class="hidden md:flex items-center space-x-8">
@@ -73,7 +65,7 @@
                             Indonesia</button>
                         <button @click="lang = 'en'; langOpen = false"
                             class="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                            :class="lang === 'en' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">ᴇɴ
+                            :class="lang === 'en' ? 'font-bold text-violet-600 dark:text-violet-400' : ''">🇬🇧
                             English</button>
                     </div>
                 </div>
@@ -96,14 +88,63 @@
                 </button>
 
                 @if (Route::has('login'))
-                <div class="hidden sm:flex gap-3">
+                <div class="hidden sm:flex gap-3 items-center ml-2 border-l border-zinc-200 dark:border-zinc-800 pl-4">
                     @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="text-sm font-medium text-white bg-violet-600 px-4 py-2 rounded-xl hover:bg-violet-700 transition-colors shadow-md shadow-violet-500/20"
-                        x-text="lang === 'id' ? 'Dasbor' : 'Dashboard'">Dasbor</a>
+                    <div x-data="{ openProfile: false }" class="relative">
+                        <button @click="openProfile = !openProfile" @click.away="openProfile = false"
+                            class="flex items-center gap-3 text-sm focus:outline-none group">
+
+                            {{-- Avatar DiceBear --}}
+                            <img class="h-9 w-9 rounded-full object-cover border-2 border-zinc-200 dark:border-zinc-700 group-hover:border-violet-400 transition-colors"
+                                src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode(Auth::user()->name) }}&backgroundColor=10b981"
+                                alt="{{ Auth::user()->name }}">
+
+                            <div
+                                class="flex items-center gap-1 text-zinc-700 dark:text-zinc-300 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                                <span class="font-medium truncate max-w-[120px]">{{ Auth::user()->name }}</span>
+                                <svg class="w-4 h-4 transition-transform duration-200"
+                                    :class="{'rotate-180': openProfile}" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </button>
+
+                        {{-- Dropdown Profil --}}
+                        <div x-show="openProfile" x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 mt-4 w-56 bg-white dark:bg-zinc-900 rounded-2xl shadow-xl border border-zinc-100 dark:border-zinc-800 py-2 z-50"
+                            style="display: none;">
+
+                            <div class="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 mb-2">
+                                <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-50 truncate">
+                                    {{ Auth::user()->name }}</p>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 truncate">{{ Auth::user()->email }}
+                                </p>
+                            </div>
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="w-[calc(100%-1rem)] mx-auto text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center gap-2.5 font-medium rounded-xl">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                        </path>
+                                    </svg>
+                                    <span x-text="lang === 'id' ? 'Keluar' : 'Log Out'">Keluar</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                     @else
                     <a href="{{ route('login') }}"
-                        class="text-sm font-medium px-4 py-2 rounded-xl border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                        class="text-sm font-medium px-4 py-2 rounded-xl border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                         x-text="lang === 'id' ? 'Masuk' : 'Login'">Masuk</a>
                     @if (Route::has('register'))
                     <a href="{{ route('register') }}"
@@ -132,7 +173,7 @@
         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 -translate-y-4" x-cloak
         class="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 absolute w-full left-0 top-full shadow-xl">
-        <div class="px-4 pt-2 pb-6 space-y-1">
+        <div class="px-4 pt-2 pb-4 space-y-1">
             <a href="{{ url('/') }}"
                 class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->is('/') ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900' }} transition-colors"
                 x-text="lang === 'id' ? 'Beranda' : 'Home'">Beranda</a>
@@ -150,22 +191,45 @@
                 x-text="lang === 'id' ? 'Kontak' : 'Contact'">Kontak</a>
 
             @if (Route::has('login'))
+            @auth
+            <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/50">
+                <div class="flex items-center gap-4 px-3 mb-4">
+                    {{-- Avatar Mobile --}}
+                    <img class="h-12 w-12 rounded-full object-cover border-2 border-zinc-200 dark:border-zinc-700"
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode(Auth::user()->name) }}&backgroundColor=10b981"
+                        alt="{{ Auth::user()->name }}">
+                    <div>
+                        <div class="font-semibold text-base text-zinc-900 dark:text-zinc-50">{{ Auth::user()->name }}
+                        </div>
+                        <div class="font-medium text-sm text-zinc-500 dark:text-zinc-400">{{ Auth::user()->email }}
+                        </div>
+                    </div>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-base font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                        <span x-text="lang === 'id' ? 'Keluar' : 'Log Out'">Keluar</span>
+                    </button>
+                </form>
+            </div>
+            @else
             <div class="pt-4 mt-2 border-t border-zinc-100 dark:border-zinc-800/50 flex flex-col gap-3 px-2">
-                @auth
-                <a href="{{ url('/dashboard') }}"
-                    class="block text-center text-base font-medium text-white bg-violet-600 px-4 py-3 rounded-xl hover:bg-violet-700 transition-colors"
-                    x-text="lang === 'id' ? 'Dasbor' : 'Dashboard'">Dasbor</a>
-                @else
                 <a href="{{ route('login') }}"
-                    class="block text-center text-base font-medium px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                    class="block text-center text-base font-medium px-4 py-3 rounded-xl border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
                     x-text="lang === 'id' ? 'Masuk Akun' : 'Login'">Masuk Akun</a>
                 @if (Route::has('register'))
                 <a href="{{ route('register') }}"
                     class="block text-center text-base font-medium text-white bg-violet-600 px-4 py-3 rounded-xl hover:bg-violet-700 transition-colors shadow-md shadow-violet-500/20"
                     x-text="lang === 'id' ? 'Daftar Akun' : 'Register'">Daftar Akun</a>
                 @endif
-                @endauth
             </div>
+            @endauth
             @endif
         </div>
     </div>

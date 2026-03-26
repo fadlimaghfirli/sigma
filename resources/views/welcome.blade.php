@@ -315,12 +315,15 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[600px]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[650px]">
             @if($highlights->count() > 0)
 
             @php $mainHighlight = $highlights[0]; @endphp
             <div data-aos="fade-right" data-aos-delay="100"
-                class="lg:col-span-8 group bg-white dark:bg-zinc-900/50 rounded-[2.5rem] p-4 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[450px] lg:h-full cursor-pointer flex flex-col">
+                class="relative lg:col-span-8 group bg-white dark:bg-zinc-900/50 rounded-[2.5rem] p-4 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[500px] lg:h-full cursor-pointer flex flex-col">
+
+                <a href="{{ url('/project/' . $mainHighlight->slug) }}"
+                    class="absolute inset-0 z-20 rounded-[2.5rem]"></a>
 
                 <div class="relative flex-grow rounded-[2rem] overflow-hidden bg-zinc-100 dark:bg-zinc-800 mb-6">
                     <img src="{{ $mainHighlight->image_url }}" alt="{{ $mainHighlight->title }}"
@@ -335,7 +338,7 @@
                         </span>
                         @if(isset($mainHighlight->tags[0]))
                         <span
-                            class="hidden sm:inline-block px-3 py-1.5 bg-zinc-900/60 backdrop-blur-md text-emerald-400 border border-white/10 text-[10px] sm:text-xs font-mono font-bold rounded-lg uppercase tracking-wide shadow-md">
+                            class="hidden sm:inline-block px-3 py-1.5 bg-zinc-900/60 backdrop-blur-md text-violet-400 border border-white/10 text-[10px] sm:text-xs font-mono font-bold rounded-lg uppercase tracking-wide shadow-md">
                             {{ $mainHighlight->tags[0] }}
                         </span>
                         @endif
@@ -344,11 +347,11 @@
 
                 <div class="px-3 pb-3">
                     <h3
-                        class="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-2 leading-tight">
+                        class="font-space-grotesk text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1 leading-tight">
                         {{ $mainHighlight->title }}
                     </h3>
                     <p
-                        class="font-roboto text-zinc-600 dark:text-zinc-400 max-w-2xl line-clamp-2 text-sm md:text-base mb-6">
+                        class="font-roboto text-zinc-600 dark:text-zinc-400 line-clamp-2 text-xs md:text-sm mb-4 flex-grow">
                         {{ $mainHighlight->short_description }}
                     </p>
 
@@ -367,8 +370,8 @@
                             </div>
                         </div>
                         <div
-                            class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-violet-600 group-hover:border-violet-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0">
-                            <svg class="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
+                            class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-violet-600 group-hover:border-violet-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0 relative z-30">
+                            <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -381,7 +384,9 @@
             <div class="lg:col-span-4 flex flex-col gap-6 lg:h-full">
                 @foreach($highlights->skip(1) as $index => $item)
                 <div data-aos="fade-left" data-aos-delay="{{ 200 + ($index * 100) }}"
-                    class="relative group bg-white dark:bg-zinc-900/50 rounded-[2rem] p-3 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 h-[300px] lg:h-1/2 cursor-pointer flex flex-col">
+                    class="relative group bg-white dark:bg-zinc-900/50 rounded-[2rem] p-3 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[500px] lg:h-1/2 cursor-pointer flex flex-col">
+
+                    <a href="{{ url('/project/' . $item->slug) }}" class="absolute inset-0 z-20 rounded-[2rem]"></a>
 
                     <div class="relative flex-grow rounded-[1.5rem] overflow-hidden bg-zinc-100 dark:bg-zinc-800 mb-4">
                         <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
@@ -391,7 +396,7 @@
 
                         <div class="absolute top-5 left-5 z-10">
                             <span
-                                class="px-2.5 py-1 bg-emerald-600/80 backdrop-blur-sm text-white border border-white/10 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-md">
+                                class="px-2.5 py-1 bg-violet-600/80 backdrop-blur-sm text-white border border-white/10 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-md">
                                 {{ $item->category }}
                             </span>
                         </div>
@@ -399,7 +404,7 @@
 
                     <div class="px-2 pb-2">
                         <h3
-                            class="font-space-grotesk text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1 leading-tight">
+                            class="font-space-grotesk text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1 leading-tight">
                             {{ $item->title }}
                         </h3>
                         <p
@@ -414,14 +419,14 @@
                                     alt="Pembuat"
                                     class="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm">
                                 <div>
-                                    <p class="text-zinc-900 dark:text-white text-xs font-boldleading-none mb-1">
+                                    <p class="text-zinc-900 dark:text-white text-xs font-bold leading-none mb-1">
                                         {{ $item->user->name }}</p>
                                     <p class="text-[9px] font-medium text-zinc-500 uppercase tracking-wider">Informatika
                                     </p>
                                 </div>
                             </div>
                             <div
-                                class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-emerald-600 group-hover:border-emerald-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0">
+                                class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-violet-600 group-hover:border-violet-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0 relative z-30">
                                 <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

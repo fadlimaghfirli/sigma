@@ -216,8 +216,8 @@
                     <p data-aos="fade-up" data-aos-delay="100"
                         class="font-roboto text-zinc-500 dark:text-zinc-400 text-sm sm:text-base">
                         <span
-                            x-text="lang === 'id' ? 'Silakan masuk dengan akun email kampus Anda.' : 'Please sign in with your campus email account.'">Silakan
-                            masuk dengan akun email kampus Anda.</span>
+                            x-text="lang === 'id' ? 'Silakan masuk dengan alamat email Anda.' : 'Please sign in with your email address.'">Silakan
+                            masuk dengan alamat email Anda.</span>
                     </p>
                 </div>
 
@@ -227,11 +227,11 @@
                     <div data-aos="fade-up" data-aos-delay="200" class="space-y-2">
                         <label for="email"
                             class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
-                            x-text="lang === 'id' ? 'Email Kampus' : 'Campus Email'">Email Kampus</label>
+                            x-text="lang === 'id' ? 'Alamat Email' : 'Email Address'">Alamat Email</label>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
                             autocomplete="username"
                             class="w-full px-4 py-3.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl placeholder-zinc-400 focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all outline-none font-roboto shadow-sm"
-                            :placeholder="lang === 'id' ? 'contoh@student.trunojoyo.ac.id' : 'example@student.trunojoyo.ac.id'">
+                            :placeholder="lang === 'id' ? 'contoh@email.com' : 'example@email.com'">
                         @error('email')
                         <p class="text-sm text-rose-500 font-roboto mt-1">{{ $message }}</p>
                         @enderror

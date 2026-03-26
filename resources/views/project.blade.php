@@ -13,14 +13,14 @@
             }
         }" class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 min-h-screen relative z-10">
 
-        <a href="{{ url('/gallery') }}"
+        <a href="{{ url()->previous() }}" data-aos="fade-right" data-aos-delay="50"
             class="inline-flex items-center gap-2 text-zinc-500 hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400 transition-colors font-medium text-sm mb-10 group">
             <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
                 </path>
             </svg>
-            Kembali ke Galeri
+            Kembali
         </a>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -44,20 +44,19 @@
                         </h1>
                     </div>
 
-                    <a href="{{ url('/profile/'.$project->user->id) }}" data-aos="fade-right" data-aos-delay="100"
+                    <div data-aos="fade-right" data-aos-delay="100"
                         class="flex items-center gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500 transition-all group">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode($project->user->name) }}&backgroundColor=8b5cf6"
                             alt="Author"
                             class="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
                         <div>
-                            <p
-                                class="text-base font-bold text-zinc-900 dark:text-white group-hover:text-violet-600 transition-colors">
+                            <p class="text-base font-bold text-zinc-900 dark:text-white">
                                 {{ $project->user->name }}
                             </p>
                             <p class="text-xs font-medium text-zinc-500 uppercase tracking-wider">Mahasiswa Informatika
                             </p>
                         </div>
-                    </a>
+                    </div>
 
                     @if($project->team_members)
                     <div data-aos="fade-right" data-aos-delay="150"

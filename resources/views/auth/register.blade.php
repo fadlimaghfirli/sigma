@@ -241,24 +241,12 @@
                     <div data-aos="fade-up" data-aos-delay="250" class="space-y-2">
                         <label for="email"
                             class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
-                            x-text="lang === 'id' ? 'Email Kampus' : 'Campus Email'">Email Kampus</label>
+                            x-text="lang === 'id' ? 'Alamat Email' : 'Email Address'">alamat Email</label>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required
                             autocomplete="username"
                             class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none transition-all font-roboto placeholder-zinc-400 shadow-sm"
-                            :placeholder="lang === 'id' ? 'contoh@student.trunojoyo.ac.id' : 'example@student.trunojoyo.ac.id'">
+                            :placeholder="lang === 'id' ? 'contoh@email.com' : 'example@email.com'">
                         @error('email')
-                        <p class="text-sm text-rose-500 font-roboto mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div data-aos="fade-up" data-aos-delay="350" class="space-y-2">
-                        <label for="nim"
-                            class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
-                            x-text="lang === 'id' ? 'Nomor Induk Mahasiswa (NIM)' : 'Student ID (NIM)'">NIM</label>
-                        <input id="nim" type="text" name="nim" value="{{ old('nim') }}" required
-                            class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none transition-all font-roboto placeholder-zinc-400 shadow-sm"
-                            :placeholder="lang === 'id' ? 'Masukkan NIM Anda' : 'Enter your Student ID'">
-                        @error('nim')
                         <p class="text-sm text-rose-500 font-roboto mt-1">{{ $message }}</p>
                         @enderror
                     </div>

@@ -29,27 +29,27 @@ class ProjectFactory extends Factory
         // ====================================================================
         $images = [
             // Theme: Website & Landing Pages
-            'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1642132652809-8c6ab1971169?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1648134859177-66e35b61e106?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1566241477600-ac026ad43874?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1686061594225-3e92c0cd51b0?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1642052502978-b6c6ea3c3797?q=80&w=1200&auto=format&fit=crop',
 
             // Theme: Dashboard & Information Systems
+            'https://images.unsplash.com/photo-1763718528755-4bca23f82ac3?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1763718432504-7716caff6e99?q=80&w=1200&auto=format&fit=crop',
             'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1511376777868-611b54f68947?q=80&w=1200&auto=format&fit=crop',
 
             // Theme: Mobile Apps (iOS/Android UI)
-            'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1551652640-696b97ac2923?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1581291518655-951832679813?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1603969403148-69c4b33a5d36?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1720135885002-a19131beb73c?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1767449441925-737379bc2c4d?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1767449356630-c60094b1d1b4?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1767449181027-dbca7575f91b?q=80&w=1200&auto=format&fit=crop',
 
             // Theme: Games & Digital Arts
-            'https://images.unsplash.com/photo-1580894908361-967195033215?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1531591022136-eb8b0da1e6d0?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1620287341639-d141a3a15cfd?q=80&w=1200&auto=format&fit=crop',
         ];
 
         $shortDesc = fake()->randomElement($descriptions);
