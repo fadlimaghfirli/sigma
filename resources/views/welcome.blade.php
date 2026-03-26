@@ -314,43 +314,58 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[600px]">
+            @if($highlights->count() > 0)
 
-            <div data-aos="fade-up" data-aos-delay="100"
-                class="lg:col-span-8 relative group rounded-3xl overflow-hidden shadow-lg h-[450px] lg:h-full cursor-pointer bg-zinc-900 border dark:border-zinc-800">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
-                    alt="Highlight 1"
-                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
-                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
+            @php $mainHighlight = $highlights[0]; @endphp
+            <div data-aos="fade-right" data-aos-delay="100"
+                class="lg:col-span-8 group bg-white dark:bg-zinc-900/50 rounded-[2.5rem] p-4 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[450px] lg:h-full cursor-pointer flex flex-col">
 
-                <div class="absolute top-6 left-6 flex flex-wrap gap-2 z-10">
-                    <span
-                        class="px-3 py-1.5 bg-violet-600 text-white text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-wide shadow-md"
-                        x-text="lang === 'id' ? 'Tugas Akhir' : 'Final Project'">Tugas Akhir</span>
-                    <span
-                        class="hidden sm:inline-block px-3 py-1.5 bg-zinc-900/60 backdrop-blur-md text-emerald-400 border border-white/10 text-[10px] sm:text-xs font-mono font-bold rounded-lg uppercase tracking-wide shadow-md">Machine
-                        Learning</span>
+                <div class="relative flex-grow rounded-[2rem] overflow-hidden bg-zinc-100 dark:bg-zinc-800 mb-6">
+                    <img src="{{ $mainHighlight->image_url }}" alt="{{ $mainHighlight->title }}"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-zinc-950/20 to-transparent">
+                    </div>
+
+                    <div class="absolute top-6 left-6 flex flex-wrap gap-2 z-10">
+                        <span
+                            class="px-3 py-1.5 bg-violet-600/80 backdrop-blur-sm text-white border border-white/10 text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-wide shadow-md">
+                            {{ $mainHighlight->category }}
+                        </span>
+                        @if(isset($mainHighlight->tags[0]))
+                        <span
+                            class="hidden sm:inline-block px-3 py-1.5 bg-zinc-900/60 backdrop-blur-md text-emerald-400 border border-white/10 text-[10px] sm:text-xs font-mono font-bold rounded-lg uppercase tracking-wide shadow-md">
+                            {{ $mainHighlight->tags[0] }}
+                        </span>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full z-10 flex flex-col justify-end">
+                <div class="px-3 pb-3">
                     <h3
-                        class="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors line-clamp-2">
-                        Sistem Deteksi Emosi Siswa AI</h3>
-                    <p class="font-roboto text-zinc-300 max-w-2xl line-clamp-2 text-sm md:text-base mb-6"
-                        x-text="lang === 'id' ? 'Penerapan model Machine Learning untuk mendeteksi tingkat kebosanan dan antusiasme siswa selama pembelajaran daring secara real-time berdasarkan pengenalan ekspresi wajah.' : 'Implementation of a Machine Learning model to detect student boredom and enthusiasm during online learning in real-time based on facial expression recognition.'">
-                        Penerapan model Machine Learning untuk mendeteksi tingkat kebosanan dan antusiasme siswa selama
-                        pembelajaran daring secara real-time berdasarkan pengenalan ekspresi wajah.
+                        class="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-2 leading-tight">
+                        {{ $mainHighlight->title }}
+                    </h3>
+                    <p
+                        class="font-roboto text-zinc-600 dark:text-zinc-400 max-w-2xl line-clamp-2 text-sm md:text-base mb-6">
+                        {{ $mainHighlight->short_description }}
                     </p>
 
-                    <div class="flex items-center justify-between border-t border-white/20 pt-5 mt-auto">
+                    <div
+                        class="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-5 mt-auto">
                         <div class="flex items-center gap-3">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Fadli&backgroundColor=8b5cf6"
-                                alt="Pembuat" class="w-10 h-10 rounded-full border-2 border-zinc-800 bg-zinc-800">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode($mainHighlight->user->name) }}&backgroundColor=8b5cf6"
+                                alt="Pembuat"
+                                class="w-11 h-11 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm">
                             <div>
-                                <p class="text-white text-sm font-bold">Fadli Maghfirli</p>
+                                <p class="text-zinc-900 dark:text-white text-sm font-bold">
+                                    {{ $mainHighlight->user->name }}</p>
+                                <p
+                                    class="text-[10px] font-medium text-zinc-500 dark:text-zinc-500 uppercase tracking-wider">
+                                    Informatika</p>
                             </div>
                         </div>
                         <div
-                            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-violet-600 group-hover:border-violet-500 transition-all duration-300 shadow-lg shrink-0">
+                            class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-violet-600 group-hover:border-violet-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0">
                             <svg class="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -362,40 +377,49 @@
             </div>
 
             <div class="lg:col-span-4 flex flex-col gap-6 lg:h-full">
+                @foreach($highlights->skip(1) as $index => $item)
+                <div data-aos="fade-left" data-aos-delay="{{ 200 + ($index * 100) }}"
+                    class="relative group bg-white dark:bg-zinc-900/50 rounded-[2rem] p-3 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 h-[300px] lg:h-1/2 cursor-pointer flex flex-col">
 
-                <div data-aos="fade-up" data-aos-delay="200"
-                    class="relative group rounded-3xl overflow-hidden shadow-lg h-[300px] lg:h-1/2 cursor-pointer bg-zinc-900 border dark:border-zinc-800">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop"
-                        alt="Highlight 2"
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
+                    <div class="relative flex-grow rounded-[1.5rem] overflow-hidden bg-zinc-100 dark:bg-zinc-800 mb-4">
+                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-zinc-950/20 to-transparent">
+                        </div>
 
-                    <div class="absolute top-5 left-5 flex flex-wrap gap-2 z-10">
-                        <span
-                            class="px-2.5 py-1 bg-emerald-600 text-white text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-md"
-                            x-text="lang === 'id' ? 'Praktikum' : 'Practicum'">Praktikum</span>
+                        <div class="absolute top-5 left-5 z-10">
+                            <span
+                                class="px-2.5 py-1 bg-emerald-600/80 backdrop-blur-sm text-white border border-white/10 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-md">
+                                {{ $item->category }}
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="absolute bottom-0 left-0 p-5 md:p-6 w-full z-10 flex flex-col justify-end">
+                    <div class="px-2 pb-2">
                         <h3
-                            class="font-space-grotesk text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors line-clamp-1">
-                            Vulnerability Scanner Lokal</h3>
-                        <p class="font-roboto text-zinc-300 line-clamp-2 text-xs md:text-sm mb-4"
-                            x-text="lang === 'id' ? 'Tools keamanan jaringan menggunakan Python untuk memindai kerentanan server institusi pendidikan.' : 'Network security tools using Python to scan vulnerabilities in educational institution servers.'">
-                            Tools keamanan jaringan menggunakan Python untuk memindai kerentanan server institusi
-                            pendidikan.
+                            class="font-space-grotesk text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1 leading-tight">
+                            {{ $item->title }}
+                        </h3>
+                        <p
+                            class="font-roboto text-zinc-600 dark:text-zinc-400 line-clamp-2 text-xs md:text-sm mb-4 flex-grow">
+                            {{ $item->short_description }}
                         </p>
 
-                        <div class="flex items-center justify-between border-t border-white/20 pt-4 mt-auto">
-                            <div class="flex items-center gap-2">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Siti&backgroundColor=10b981"
-                                    alt="Pembuat" class="w-8 h-8 rounded-full border-2 border-zinc-800 bg-zinc-800">
+                        <div
+                            class="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-4 mt-auto">
+                            <div class="flex items-center gap-2.5">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode($item->user->name) }}&backgroundColor=10b981"
+                                    alt="Pembuat"
+                                    class="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm">
                                 <div>
-                                    <p class="text-white text-xs font-bold">Siti Masruroh</p>
+                                    <p class="text-zinc-900 dark:text-white text-xs font-boldleading-none mb-1">
+                                        {{ $item->user->name }}</p>
+                                    <p class="text-[9px] font-medium text-zinc-500 uppercase tracking-wider">Informatika
+                                    </p>
                                 </div>
                             </div>
                             <div
-                                class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-600 group-hover:border-emerald-500 transition-all duration-300 shadow-lg shrink-0">
+                                class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:bg-emerald-600 group-hover:border-emerald-500 group-hover:text-white transition-all duration-300 shadow-lg shrink-0">
                                 <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -405,50 +429,9 @@
                         </div>
                     </div>
                 </div>
-
-                <div data-aos="fade-up" data-aos-delay="300"
-                    class="relative group rounded-3xl overflow-hidden shadow-lg h-[300px] lg:h-1/2 cursor-pointer bg-zinc-900 border dark:border-zinc-800">
-                    <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=600&auto=format&fit=crop"
-                        alt="Highlight 3"
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
-
-                    <div class="absolute top-5 left-5 flex flex-wrap gap-2 z-10">
-                        <span
-                            class="px-2.5 py-1 bg-blue-600 text-white text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-md"
-                            x-text="lang === 'id' ? 'Kompetisi' : 'Competition'">Kompetisi</span>
-                    </div>
-
-                    <div class="absolute bottom-0 left-0 p-5 md:p-6 w-full z-10 flex flex-col justify-end">
-                        <h3
-                            class="font-space-grotesk text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors line-clamp-1">
-                            Marketplace Freelance Kampus</h3>
-                        <p class="font-roboto text-zinc-300 line-clamp-2 text-xs md:text-sm mb-4"
-                            x-text="lang === 'id' ? 'Aplikasi web penghubung mahasiswa IT dengan proyek lepas di lingkungan universitas.' : 'Web app connecting IT students with freelance projects within the university environment.'">
-                            Aplikasi web penghubung mahasiswa IT dengan proyek lepas di lingkungan universitas.
-                        </p>
-
-                        <div class="flex items-center justify-between border-t border-white/20 pt-4 mt-auto">
-                            <div class="flex items-center gap-2">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aditya&backgroundColor=3b82f6"
-                                    alt="Pembuat" class="w-8 h-8 rounded-full border-2 border-zinc-800 bg-zinc-800">
-                                <div>
-                                    <p class="text-white text-xs font-bold">M. Aditya F.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-lg shrink-0">
-                                <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
+            @endif
         </div>
     </section>
 
@@ -645,10 +628,10 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('statsCounter', () => ({
-                karya: 0, targetKarya: 245,
-                mahasiswa: 0, targetMahasiswa: 128,
-                kategori: 0, targetKategori: 12,
-                pengunjung: 0, targetPengunjung: 85,
+                karya: 0, targetKarya: {{ $totalKarya ?? 0 }},
+                mahasiswa: 0, targetMahasiswa: {{ $totalMahasiswa ?? 0 }},
+                kategori: 0, targetKategori: {{ $totalKategori ?? 0 }},
+                pengunjung: 0, targetPengunjung: {{ $totalKunjungan ?? 0 }},
                 started: false,
                 observe() {
                     let observer = new IntersectionObserver((entries) => {
