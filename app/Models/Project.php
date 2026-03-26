@@ -16,6 +16,7 @@ class Project extends Model
     {
         return [
             'tags' => 'array',
+            'team_members' => 'array',
             'is_highlight' => 'boolean',
         ];
     }
