@@ -135,21 +135,23 @@
                 </span>
             </p>
 
-            <div data-aos="zoom-in" data-aos-delay="300"
+            <form action="{{ url('/gallery') }}" method="GET" data-aos="zoom-in" data-aos-delay="300"
                 class="w-full max-w-2xl bg-white dark:bg-zinc-900 p-2 rounded-2xl shadow-lg border border-zinc-200 dark:border-zinc-800 flex items-center mb-10 transition-all focus-within:ring-2 focus-within:ring-violet-500 focus-within:border-transparent">
                 <svg class="w-6 h-6 text-zinc-400 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <input type="text"
+
+                <input type="text" name="search"
                     :placeholder="lang === 'id' ? 'Cari karya, nama pembuat, atau teknologi...' : 'Search for projects, creators, or technology...'"
                     class="w-full bg-transparent border-none text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:ring-0 px-4 py-3 font-roboto outline-none">
-                <button
+
+                <button type="submit"
                     class="bg-violet-600 hover:bg-violet-700 text-white font-medium px-6 py-3 rounded-xl transition-colors shrink-0"
                     x-text="lang === 'id' ? 'Cari' : 'Search'">
                     Cari
                 </button>
-            </div>
+            </form>
         </div>
     </section>
 

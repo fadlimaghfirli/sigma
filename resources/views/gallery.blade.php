@@ -261,7 +261,7 @@
                 </div>
             </div>
             @empty
-            <div
+            <div data-aos="fade-up" data-aos-delay="300"
                 class="col-span-1 md:col-span-2 lg:col-span-3 py-24 text-center flex flex-col items-center justify-center bg-white dark:bg-zinc-900/50 rounded-[3rem] border border-dashed border-zinc-300 dark:border-zinc-700 relative z-10">
                 <svg class="w-20 h-20 text-zinc-300 dark:text-zinc-700 mb-6" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
