@@ -13,14 +13,14 @@
             }
         }" class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 min-h-screen relative z-10">
 
-        <a href="{{ url()->previous() }}" data-aos="fade-right" data-aos-delay="50"
+        <a href="/gallery" data-aos="fade-right" data-aos-delay="50"
             class="inline-flex items-center gap-2 text-zinc-500 hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400 transition-colors font-medium text-sm mb-10 group">
             <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
                 </path>
             </svg>
-            Kembali
+            Kembali ke Galeri
         </a>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -53,7 +53,7 @@
                             <p class="text-base font-bold text-zinc-900 dark:text-white">
                                 {{ $project->user->name }}
                             </p>
-                            <p class="text-xs font-medium text-zinc-500 uppercase tracking-wider">Mahasiswa Informatika
+                            <p class="text-xs font-medium text-zinc-500 tracking-wider">Pendidikan Informatika
                             </p>
                         </div>
                     </div>
@@ -282,9 +282,8 @@
                                                 <p
                                                     class="text-xs font-bold text-zinc-900 dark:text-white leading-none mb-1">
                                                     {{ $rel->user->name }}</p>
-                                                <p
-                                                    class="text-[9px] font-medium text-zinc-500 uppercase tracking-wider">
-                                                    Informatika</p>
+                                                <p class="text-[9px] font-medium text-zinc-500 tracking-wider">
+                                                    Pendidikan Informatika</p>
                                             </div>
                                         </div>
 

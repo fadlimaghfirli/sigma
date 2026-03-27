@@ -78,8 +78,7 @@
                             <div>
                                 <p class="text-white font-bold text-sm md:text-base drop-shadow">{{ $item->user->name }}
                                 </p>
-                                <p class="text-xs text-zinc-400 uppercase tracking-wider font-medium">Mahasiswa
-                                    Informatika</p>
+                                <p class="text-xs text-zinc-400 tracking-wider font-medium">Pendidikan Informatika</p>
                             </div>
                         </div>
                     </div>
@@ -220,7 +219,8 @@
                             <div>
                                 <p class="text-xs font-bold text-zinc-900 dark:text-white leading-none mb-1">
                                     {{ $item->user->name }}</p>
-                                <p class="text-[9px] font-medium text-zinc-500 uppercase tracking-wider">Informatika</p>
+                                <p class="text-[9px] font-medium text-zinc-500 tracking-wider">Pendidikan Informatika
+                                </p>
                             </div>
                         </div>
 

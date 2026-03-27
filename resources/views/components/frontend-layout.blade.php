@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ 
-        darkMode: localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
+        darkMode: localStorage.getItem('darkMode') === 'true',
         lang: localStorage.getItem('lang') || 'id'
     }" x-init="
         $watch('darkMode', val => localStorage.setItem('darkMode', val));

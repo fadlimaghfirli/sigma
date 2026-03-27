@@ -122,7 +122,7 @@
                     </button>
                 </div>
                 @endif
-                <form action="{{ route('contact.store') }}" method="POST"
+                <form action="#"
                     class="bg-white dark:bg-zinc-900 p-8 md:p-10 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-xl flex flex-col gap-6">
                     @csrf
 
