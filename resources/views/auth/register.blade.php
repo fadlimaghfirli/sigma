@@ -11,6 +11,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="turbo-cache-control" content="no-cache">
+
     <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_sigma.png') }}">
     <title>Daftar - SIGMA</title>
@@ -47,10 +49,16 @@
 
     <script>
         document.addEventListener("turbo:load", function() {
-            // Memaksa progress bar muncul tanpa delay (0 ms)
             if (window.Turbo) {
                 Turbo.setProgressBarDelay(0);
             }
+        });
+
+        // SOLUSI 2: Artificial Delay untuk efek loading mulus
+        document.addEventListener("turbo:before-render", async (event) => {
+            event.preventDefault();
+            await new Promise(resolve => setTimeout(resolve, 400));
+            event.detail.resume();
         });
     </script>
 
@@ -380,11 +388,26 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            once: true,
-            offset: 20,
-            duration: 800,
-            easing: 'ease-out-cubic',
+        // Logika AOS dan Turbo Event (Sama seperti frontend-layout)
+        document.addEventListener('turbo:before-visit', () => {
+            document.documentElement.classList.remove('scroll-smooth');
+        });
+
+        document.addEventListener('turbo:render', () => {
+            window.scrollTo(0, 0);
+        });
+
+        document.addEventListener('turbo:load', () => {
+            AOS.init({
+                once: true,
+                offset: 20,
+                duration: 800,
+                easing: 'ease-out-cubic',
+            });
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+                document.documentElement.classList.add('scroll-smooth');
+            }, 100);
         });
     </script>
 </body>
