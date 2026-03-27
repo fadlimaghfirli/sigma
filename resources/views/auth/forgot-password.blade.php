@@ -136,7 +136,7 @@
         <div class="w-full md:w-1/2 lg:w-2/5 flex flex-col relative bg-white dark:bg-zinc-950 min-h-screen">
 
             <div class="absolute top-0 left-0 w-full p-6 sm:p-8 flex justify-between items-start z-20">
-                <a href="{{ route('login') }}" data-aos="fade-down"
+                <a href="javascript:history.back()" data-aos="fade-down"
                     class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group bg-zinc-50 dark:bg-zinc-900 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800">
                     <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -210,8 +210,8 @@
                     <p data-aos="fade-up" data-aos-delay="100"
                         class="font-roboto text-zinc-500 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
                         <span
-                            x-text="lang === 'id' ? 'Tidak masalah. Beri tahu kami alamat email kampus Anda dan kami akan mengirimkan email berisi tautan pengaturan ulang kata sandi.' : 'No problem. Just let us know your campus email address and we will email you a password reset link.'">
-                            Tidak masalah. Beri tahu kami alamat email kampus Anda dan kami akan mengirimkan email
+                            x-text="lang === 'id' ? 'Tidak masalah. Beri tahu kami alamat email Anda dan kami akan mengirimkan email berisi tautan pengaturan ulang kata sandi.' : 'No problem. Just let us know your email address and we will email you a password reset link.'">
+                            Tidak masalah. Beri tahu kami alamat email Anda dan kami akan mengirimkan email
                             berisi tautan pengaturan ulang kata sandi.
                         </span>
                     </p>

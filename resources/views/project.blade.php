@@ -45,7 +45,7 @@
                     </div>
 
                     <div data-aos="fade-right" data-aos-delay="100"
-                        class="flex items-center gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500 transition-all group">
+                        class="flex items-center gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ urlencode($project->user->name) }}&backgroundColor=8b5cf6"
                             alt="Author"
                             class="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">

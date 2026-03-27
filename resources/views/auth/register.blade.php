@@ -143,7 +143,7 @@
 
             <div class="absolute top-0 left-0 w-full p-6 sm:p-8 flex justify-between items-start z-20">
 
-                <a href="{{ url()->previous() }}" data-aos="fade-down"
+                <a href="javascript:history.back()" data-aos="fade-down"
                     class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group bg-zinc-50 dark:bg-zinc-900 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800">
                     <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">

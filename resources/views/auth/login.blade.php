@@ -11,6 +11,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="turbo-cache-control" content="no-cache">
+
     <link rel="icon" type="image/png" href="{{ asset('favicon_sigma.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_sigma.png') }}">
     <title>Masuk - SIGMA</title>
@@ -41,30 +43,34 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-    </style>
 
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js"></script>
-
-    <script>
-        document.addEventListener("turbo:load", function() {
-            // Memaksa progress bar muncul tanpa delay (0 ms)
-            if (window.Turbo) {
-                Turbo.setProgressBarDelay(0);
-            }
-        });
-    </script>
-
-    <style>
+        /* Styling Progress Bar Turbo */
         .turbo-progress-bar {
             height: 3px !important;
             background-color: #8b5cf6 !important;
             /* Warna violet utama SIGMA */
             box-shadow: 0 0 15px rgba(139, 92, 246, 0.8), 0 0 5px rgba(139, 92, 246, 0.5);
             z-index: 99999 !important;
-            /* Tambahkan efek transisi agar pergerakan bar lebih terlihat mulus dan tidak langsung menghilang */
             transition: width 300ms ease-out, opacity 150ms 150ms ease-in !important;
         }
     </style>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js"></script>
+
+    <script>
+        document.addEventListener("turbo:load", function() {
+            if (window.Turbo) {
+                Turbo.setProgressBarDelay(0);
+            }
+        });
+
+        // SOLUSI 2: Artificial Delay untuk efek loading mulus
+        document.addEventListener("turbo:before-render", async (event) => {
+            event.preventDefault();
+            await new Promise(resolve => setTimeout(resolve, 400));
+            event.detail.resume();
+        });
+    </script>
 </head>
 
 <body
@@ -74,74 +80,60 @@
 
         <div
             class="hidden md:flex md:w-1/2 lg:w-3/5 relative mesh-gradient items-center justify-center p-12 lg:p-20 overflow-hidden">
-
             <div class="absolute inset-0 z-0 opacity-[0.04]"
                 style="background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px); background-size: 50px 50px;">
             </div>
-
             <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/20 rounded-full filter blur-[120px] animate-pulse"
                 style="animation-duration: 4s;"></div>
             <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full filter blur-[100px] animate-pulse"
                 style="animation-duration: 6s;"></div>
 
             <div class="relative z-10 w-full max-w-2xl" x-data="statsCounter()" x-init="observe()">
-
                 <div class="space-y-8">
                     <div data-aos="fade-down"
                         class="inline-block px-4 py-2 glass rounded-2xl font-space-grotesk text-violet-400 text-sm font-bold tracking-widest uppercase mb-2 shadow-lg">
                         Powered by SIGMA
                     </div>
-
                     <h1 data-aos="fade-up" data-aos-delay="100"
                         class="text-6xl lg:text-7xl xl:text-8xl font-space-grotesk font-bold text-white leading-[1.1] tracking-tighter">
                         <span x-text="lang === 'id' ? 'Membentuk' : 'Shaping the'">Membentuk</span> <br>
                         <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400"
-                            x-text="lang === 'id' ? 'Masa Depan.' : 'Future.'">
-                            Masa Depan.
-                        </span>
+                            x-text="lang === 'id' ? 'Masa Depan.' : 'Future.'">Masa Depan.</span>
                     </h1>
-
                     <p data-aos="fade-up" data-aos-delay="200"
                         class="text-zinc-400 text-xl font-roboto max-w-md leading-relaxed">
                         <span
                             x-text="lang === 'id' ? 'Kelola data inovasi dan mahakarya Anda dalam satu platform cerdas yang terintegrasi.' : 'Manage your innovation data and masterpieces in one intelligent integrated platform.'">Kelola
                             data inovasi dan mahakarya Anda dalam satu platform cerdas yang terintegrasi.</span>
                     </p>
-
                     <div class="grid grid-cols-2 gap-4 sm:gap-6 mt-12">
                         <div data-aos="fade-up" data-aos-delay="300"
                             class="glass p-6 sm:p-8 rounded-3xl border-l-4 border-l-violet-500/50 hover:bg-white/5 transition-colors shadow-2xl">
-                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2">
-                                <span x-text="karya">0</span>+
-                            </div>
+                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2"><span
+                                    x-text="karya">0</span>+</div>
                             <div class="text-zinc-400 text-sm sm:text-base font-medium font-roboto"
                                 x-text="lang === 'id' ? 'Karya Mahasiswa' : 'Student Projects'">Karya Mahasiswa</div>
                         </div>
-
                         <div data-aos="fade-up" data-aos-delay="400"
                             class="glass p-6 sm:p-8 rounded-3xl border-l-4 border-l-emerald-500/50 hover:bg-white/5 transition-colors shadow-2xl">
-                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2">
-                                <span x-text="mahasiswa">0</span>+
-                            </div>
+                            <div class="text-white text-4xl sm:text-5xl font-bold font-space-grotesk mb-2"><span
+                                    x-text="mahasiswa">0</span>+</div>
                             <div class="text-zinc-400 text-sm sm:text-base font-medium font-roboto"
                                 x-text="lang === 'id' ? 'Mahasiswa Aktif' : 'Active Students'">Mahasiswa Aktif</div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div
                 class="absolute bottom-10 left-10 text-[10rem] font-bold text-white/[0.02] select-none pointer-events-none font-space-grotesk">
-                SIGMA
-            </div>
+                SIGMA</div>
         </div>
 
         <div class="w-full md:w-1/2 lg:w-2/5 flex flex-col relative bg-white dark:bg-zinc-950 min-h-screen">
 
             <div class="absolute top-0 left-0 w-full p-6 sm:p-8 flex justify-between items-start z-20">
-
-                <a href="{{ url()->previous() }}" data-aos="fade-down"
+                <a href="javascript:history.back()" data-aos="fade-down"
                     class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group bg-zinc-50 dark:bg-zinc-900 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800">
                     <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -200,14 +192,12 @@
 
             <div
                 class="flex-grow flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-20 w-full max-w-xl mx-auto pt-28 pb-10">
-
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <div class="mb-10 text-left">
                     <div data-aos="fade-down" class="md:hidden mb-8">
                         <img src="{{ asset('logo_sigma.png') }}" alt="" width="150">
                     </div>
-
                     <h2 data-aos="fade-up"
                         class="font-space-grotesk text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-3">
                         <span x-text="lang === 'id' ? 'Masuk ke Akun Anda' : 'Sign in to your account'">Masuk ke Akun
@@ -223,7 +213,6 @@
 
                 <form method="POST" action="{{ route('login') }}" class="space-y-6 w-full">
                     @csrf
-
                     <div data-aos="fade-up" data-aos-delay="200" class="space-y-2">
                         <label for="email"
                             class="block font-space-grotesk text-sm font-bold text-zinc-700 dark:text-zinc-300"
@@ -284,9 +273,7 @@
                             class="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-violet-600 focus:ring-violet-500 dark:focus:ring-violet-600 dark:ring-offset-zinc-950 dark:bg-zinc-900 cursor-pointer transition-colors">
                         <label for="remember_me"
                             class="ml-2 block text-sm font-medium text-zinc-600 dark:text-zinc-400 font-roboto cursor-pointer"
-                            x-text="lang === 'id' ? 'Ingat sesi saya' : 'Remember my session'">
-                            Ingat sesi saya
-                        </label>
+                            x-text="lang === 'id' ? 'Ingat sesi saya' : 'Remember my session'">Ingat sesi saya</label>
                     </div>
 
                     <div data-aos="fade-up" data-aos-delay="500" class="pt-4">
@@ -335,11 +322,11 @@
                 },
                 animate(target, prop) {
                     let startTimestamp = null;
-                    const duration = 2500; // 2.5 detik animasi
+                    const duration = 2500;
                     const step = (timestamp) => {
                         if (!startTimestamp) startTimestamp = timestamp;
                         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                        const ease = 1 - Math.pow(1 - progress, 4); // Quartic ease-out
+                        const ease = 1 - Math.pow(1 - progress, 4);
                         this[prop] = Math.floor(ease * target);
                         if (progress < 1) {
                             window.requestAnimationFrame(step);
@@ -353,11 +340,26 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            once: true,
-            offset: 20,
-            duration: 800,
-            easing: 'ease-out-cubic',
+        // Logika AOS dan Turbo Event (Sama seperti frontend-layout)
+        document.addEventListener('turbo:before-visit', () => {
+            document.documentElement.classList.remove('scroll-smooth');
+        });
+
+        document.addEventListener('turbo:render', () => {
+            window.scrollTo(0, 0);
+        });
+
+        document.addEventListener('turbo:load', () => {
+            AOS.init({
+                once: true,
+                offset: 20,
+                duration: 800,
+                easing: 'ease-out-cubic',
+            });
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+                document.documentElement.classList.add('scroll-smooth');
+            }, 100);
         });
     </script>
 </body>

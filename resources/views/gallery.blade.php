@@ -4,7 +4,7 @@
         x-init="if(window.location.hash) { setTimeout(() => { const el = document.querySelector(window.location.hash); if(el) el.scrollIntoView({ behavior: 'smooth' }); }, 400); }"
         class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 flex flex-col gap-10 min-h-screen relative z-10">
 
-        <div data-aos="fade-down" data-aos-duration="800"
+        <div data-aos="fade-up" data-aos-duration="800"
             class="text-center md:text-left flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
                 <h1 class="font-space-grotesk text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-3">
@@ -19,7 +19,7 @@
         </div>
 
         @if(!request('search') && isset($featuredProjects) && $featuredProjects->count() > 0)
-        <div data-aos="fade-up" data-aos-delay="100" x-data="{
+        <div data-aos="fade-up" data-aos-delay="200" x-data="{
                 activeSlide: 0,
                 slidesCount: {{ $featuredProjects->count() }},
                 interval: null,

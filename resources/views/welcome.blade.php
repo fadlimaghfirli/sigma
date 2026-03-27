@@ -319,7 +319,7 @@
             @if($highlights->count() > 0)
 
             @php $mainHighlight = $highlights[0]; @endphp
-            <div data-aos="fade-right" data-aos-delay="100"
+            <div data-aos="fade-up" data-aos-delay="100"
                 class="relative lg:col-span-8 group bg-white dark:bg-zinc-900/50 rounded-[2.5rem] p-4 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[500px] lg:h-full cursor-pointer flex flex-col">
 
                 <a href="{{ url('/project/' . $mainHighlight->slug) }}"
@@ -383,7 +383,7 @@
 
             <div class="lg:col-span-4 flex flex-col gap-6 lg:h-full">
                 @foreach($highlights->skip(1) as $index => $item)
-                <div data-aos="fade-left" data-aos-delay="{{ 200 + ($index * 100) }}"
+                <div data-aos="fade-up" data-aos-delay="{{ 200 + ($index * 100) }}"
                     class="relative group bg-white dark:bg-zinc-900/50 rounded-[2rem] p-3 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 h-[500px] lg:h-1/2 cursor-pointer flex flex-col">
 
                     <a href="{{ url('/project/' . $item->slug) }}" class="absolute inset-0 z-20 rounded-[2rem]"></a>
